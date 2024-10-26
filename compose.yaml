@@ -1,25 +1,30 @@
 
 name: virtd
 
+include: 
+  - proxy.yaml
+
 services:
   db:
-    image: mysql
+    image: mysql:8
     restart: always
     env_file: ./.env
     ports:
       - "3306:3306"
     networks:
-      - back
-    command: ["./start_web.sh"]
+      - backend
+    
     
 
   web:
-    image: shvirt-ex:alf-4
+    #image: docker pull cr.yandex/crp8q7knbclpl1vge168/shvirtd:0.0.1a
+    image: shvirtd:0.0.1a
     build:
       context: .
       dockerfile: Dockerfile.python
     networks:
-      - back
+      backend:
+        ipv4_address: 172.20.0.5 
     ports:
       - "5000:5000"
     env_file: ./.env
@@ -30,8 +35,4 @@ services:
       - DB_NAME=$MYSQL_DATABASE
     depends_on:
       - db
-
-  
-
-networks:
-  back: {}
+    command: ["./start_web.sh"]

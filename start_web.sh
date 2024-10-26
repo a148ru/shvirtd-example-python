@@ -1,20 +1,18 @@
 #!/bin/bash
 
-echo "waitin 5 seconds db"
+echo "waitin 10 seconds db"
 sleep 5
 
-# for debug env
-if [["$TEST_APP" == "True"]]; then
-export DB_HOST=
-export DB_USER=
-export DB_PASSWORD=
-export DB_NAME=
+HOST=localhost
+PORT=3306
 
-echo $DB_HOST
-echo $DB_USER
-echo $DB_PASSWORD
-echo $DB_NAME
-fi
+
+#count=0
+while [ -z $(echo "" > /dev/tcp/$HOST/$PORT && echo "Opened" || echo "Closed" | grep Opened) ] #&& [ $count != 10 ]
+do
+sleep 5
+#count=$((count+1))
+done
 
 # run app
 exec python3 ./main.py
