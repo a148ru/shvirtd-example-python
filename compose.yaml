@@ -18,12 +18,11 @@ services:
     
 
   web:
-    #image: docker pull cr.yandex/crp8q7knbclpl1vge168/shvirtd:0.0.2a
-    image: shvirtd:0.0.2a
-    restart: always
+    image: cr.yandex/crp8q7knbclpl1vge168/shvirtd:0.0.2a
     build:
       context: .
       dockerfile: Dockerfile.python
+    restart: always
     networks:
       backend:
         ipv4_address: 172.20.0.5 
