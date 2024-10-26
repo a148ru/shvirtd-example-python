@@ -10,6 +10,8 @@ services:
       - "3306:3306"
     networks:
       - back
+    command: ["./start_web.sh"]
+    
 
   web:
     image: shvirt-ex:alf-4
