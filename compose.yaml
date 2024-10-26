@@ -12,13 +12,15 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - backend
+      backend:
+        ipv4_address: 172.20.0.10
     
     
 
   web:
     #image: docker pull cr.yandex/crp8q7knbclpl1vge168/shvirtd:0.0.2a
     image: shvirtd:0.0.2a
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile.python
