@@ -1,0 +1,35 @@
+
+name: virtd
+
+services:
+  db:
+    image: mysql
+    restart: always
+    env_file: ./.env
+    ports:
+      - "3306:3306"
+    networks:
+      - back
+
+  web:
+    image: shvirt-ex:alf-4
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    networks:
+      - back
+    ports:
+      - "5000:5000"
+    env_file: ./.env
+    environment:
+      - DB_HOST=db
+      - DB_USER=$MYSQL_USER
+      - DB_PASSWORD=$MYSQL_PASSWORD
+      - DB_NAME=$MYSQL_DATABASE
+    depends_on:
+      - db
+
+  
+
+networks:
+  back: {}

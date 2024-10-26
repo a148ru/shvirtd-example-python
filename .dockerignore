@@ -1,0 +1,9 @@
+Dockerfile.python
+.env
+.dockerignore
+.git
+haproxy
+LICENSE
+nginx
+proxy.yaml
+schema.pdf
