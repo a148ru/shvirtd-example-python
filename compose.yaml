@@ -17,8 +17,8 @@ services:
     
 
   web:
-    #image: docker pull cr.yandex/crp8q7knbclpl1vge168/shvirtd:0.0.1a
-    image: shvirtd:0.0.1a
+    #image: docker pull cr.yandex/crp8q7knbclpl1vge168/shvirtd:0.0.2a
+    image: shvirtd:0.0.2a
     build:
       context: .
       dockerfile: Dockerfile.python
